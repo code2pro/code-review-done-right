@@ -9,10 +9,10 @@ Reveal.initialize({
     defaultTiming: 120,
 
     // Display the page number of the current slide
-    slideNumber: false,
+    slideNumber: true,
 
     // Push each slide change to the browser history
-    history: false,
+    history: true,
 
     // Enable keyboard shortcuts for navigation
     keyboard: true,
@@ -67,13 +67,13 @@ Reveal.initialize({
     autoSlideMethod: Reveal.navigateNext,
 
     // Enable slide navigation via mouse wheel
-    mouseWheel: false,
+    mouseWheel: true,
 
     // Hides the address bar on mobile devices
     hideAddressBar: true,
 
     // Opens links in an iframe preview overlay
-    previewLinks: false,
+    previewLinks: true,
 
     // Transition style
     transition: 'convex', // none/fade/slide/convex/concave/zoom
