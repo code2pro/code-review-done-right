@@ -1,0 +1,112 @@
+graph LR
+
+CQ(Gather Requirements);
+CS(Scope, Impact Analysis);
+DR(Design Review);
+TR(Technical Review);
+
+C((Code));
+
+U(Unit Tests);
+ST(Smoke Tests);
+IT(Integration Tests);
+RT(Regression Tests);
+PT(Performance Tests);
+
+IM((Improve))
+
+ML(Memory Leak);
+MT(Multi-threading Check);
+DC(Dead code);
+L(Linter);
+F(Formatter);
+SA(Static Analysis);
+
+PR((PR));
+
+Style(Style/Format);
+CRI(Language Idioms);
+CRD(Design Patterns);
+CRA(Optimisation: Algo + DS);
+VR(Verify Tests);
+SCR(Security Code Review);
+
+M((Merge));
+
+subgraph Design
+  CQ
+  CS
+  DR
+  TR
+end
+
+subgraph Tests/CT
+  U
+  ST
+  IT
+  RT
+  PT
+end
+
+subgraph Automated Code Analysis
+  ML
+  MT
+  DC
+  L
+  F
+  SA
+end
+
+subgraph Code Review
+  Style
+  CRI
+  CRD
+  CRA
+  VR
+  SCR
+end
+
+CQ --> C;
+CS --> C;
+DR --> C;
+TR --> C;
+
+C --> U;
+C --> ST;
+C --> IT;
+C --> RT;
+C --> PT;
+
+U --> IM;
+ST --> IM;
+IT --> IM;
+RT --> IM;
+PT --> IM;
+
+IM --> ML;
+IM --> MT;
+IM --> DC;
+IM --> L;
+IM --> F;
+IM --> SA;
+
+ML --> PR;
+MT --> PR;
+DC --> PR;
+L --> PR;
+F --> PR;
+SA --> PR;
+
+PR --> Style;
+PR --> CRI;
+PR --> CRD;
+PR --> CRA;
+PR --> VR;
+PR --> SCR;
+
+Style --> M;
+CRI --> M;
+CRD --> M;
+CRA --> M;
+VR --> M;
+SCR --> M;
