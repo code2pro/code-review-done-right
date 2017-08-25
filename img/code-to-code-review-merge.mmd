@@ -15,12 +15,11 @@ PT(Performance Tests);
 
 IM((Improve))
 
+F(Formatter);
+SA(Linter/Static Analysis);
+CV(Code Coverage);
 ML(Memory Leak);
 MT(Multi-threading Check);
-DC(Dead code);
-L(Linter);
-F(Formatter);
-SA(Static Analysis);
 
 PR((PR));
 
@@ -48,13 +47,12 @@ subgraph Tests/CT
   PT
 end
 
-subgraph Automated Code Analysis
-  ML
-  MT
-  DC
-  L
+subgraph Tools
   F
   SA
+  CV
+  ML
+  MT
 end
 
 subgraph Code Review
@@ -83,19 +81,17 @@ IT --> IM;
 RT --> IM;
 PT --> IM;
 
-IM --> ML;
-IM --> MT;
-IM --> DC;
-IM --> L;
 IM --> F;
 IM --> SA;
+IM --> CV;
+IM --> ML;
+IM --> MT;
 
-ML --> PR;
-MT --> PR;
-DC --> PR;
-L --> PR;
 F --> PR;
 SA --> PR;
+CV --> PR;
+ML --> PR;
+MT --> PR;
 
 PR --> Style;
 PR --> CRI;
