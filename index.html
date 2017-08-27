@@ -814,6 +814,18 @@ private:
                     </section>
 
                     <section>
+                        <h4>Lack of Abstraction: Memory Leak &amp; Deadlock</h4>
+                        <p>Commentary on DbConn(Pool)</p>
+
+                        <ol>
+                            <li class="fragment">Design simple &amp; fool-proof APIs. Don't trust users ;-)</li>
+                            <li class="fragment">Some prefer a Singleton DbConnPool for all DBs</li>
+                            <li class="fragment">Be careful in what to expose via public API</li>
+                            <li class="fragment">Design review is so vital!</li>
+                        </ol>
+                    </section>
+
+                    <section>
                         <h4>Verify Generated Code: Ragel &amp; CloudFlare</h4>
                     </section>
 
