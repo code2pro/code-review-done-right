@@ -346,7 +346,7 @@
                             <li class="fragment">Type Safety Matters</li>
                             <li class="fragment">Buffer Overflow &amp; Stack Overflow</li>
                             <li class="fragment">Integer Overflow: Google Binary Search</li>
-                            <li class="fragment">Lack of Abstraction: Deadlock &amp; Memory Leak</li>
+                            <li class="fragment">Lack of Abstraction: Memory Leak &amp; Deadlock</li>
                             <li class="fragment">Trust But Verify Generated Code: Ragel &amp; CloudFlare</li>
                             <li class="fragment">Codacy Sample</li>
                         </ol>
@@ -743,7 +743,7 @@ update_team_balance(user, 1000000)
                     </section>
 
                     <section>
-                        <h4>Lack of Abstraction: Deadlock &amp; Memory Leak</h4>
+                        <h4>Lack of Abstraction: Memory Leak &amp; Deadlock</h4>
                         <p class="fragment">Safe API design is tricky</p>
 
                         <div class="fragment code-snippet">
@@ -756,10 +756,10 @@ public:
     // Constructors + Destructor
     ~DbConn() { /* Close connection if open */ }
     bool open(const std::string& dbURI);
-    bool isOpen() const;
     void close();
     // Open DB connection before executing
     int execute(const std::string& stmt, Result* out);
+    bool isOpen() const;
     ...
 };
 </code>
