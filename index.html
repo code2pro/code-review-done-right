@@ -790,6 +790,30 @@ public:
                     </section>
 
                     <section>
+                        <h4>Lack of Abstraction: Memory Leak &amp; Deadlock</h4>
+                        <p>Solution: Have Proper Abstraction</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>// Public API to access DB
+class DbConnPool
+{
+public:
+    static DbConnPool* createDbPool(const std::string& dbURI);
+    ~DbConnPool(); // Take care of releasing resources
+    // Fool-proof API, just execute
+    int execute(const std::string& stmt, Result* out);
+    ...
+private:
+    // Take care of constructors
+};
+</code>
+                            </pre>
+                        </div>
+                    </section>
+
+                    <section>
                         <h4>Verify Generated Code: Ragel &amp; CloudFlare</h4>
                     </section>
 
