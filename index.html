@@ -744,11 +744,16 @@ cin >> (buf);
 <code
 >class Record
 {
-...
-    // Max record anticipated
-    char array[1500000];
-...
+    char array[1500000]; // Max size anticipated
 };
+
+void processData(int input, int anotherInput) // Simplified code
+{
+    Record rec;
+    if (check(input)) {
+        processData(input - 1, anotherInput);
+    }
+}
 </code>
                             </pre>
                         </div>
