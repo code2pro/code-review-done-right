@@ -368,7 +368,7 @@
                     </section>
 
                     <section>
-                        <h4>Can You Spot Issues?</h4>
+                        <h4>Take 1. Can You Spot Issues?</h4>
 
                         <div class=".code-snippet">
                             <pre>
@@ -381,14 +381,14 @@
         result = queryData(request.target)
         response.send(result.json())
     else:
-        response.send(AccessDenied.json())
+        response.send(AccessDenied)
 </code>
                             </pre>
                         </div>
                     </section>
 
                     <section>
-                        <h4>Can You Spot Issues?</h4>
+                        <h4>Take 1. Can You Spot Issues?</h4>
 
                         <ol>
                             <li class="fragment">The condition chain is complex</li>
@@ -399,17 +399,43 @@
                     </section>
 
                     <section>
-                        <h4>Poor Error Handling</h4>
+                        <h4>Take 2. Can You Spot Issues?</h4>
+
+                        <div class=".code-snippet">
+                            <pre>
+<code
+>def getExpenseData(request, response):
+    if authenticate(request.user):
+        if targetExists(request.target):
+            if checkQuota(request.user):
+                if isAuthorized(request.user, request.target):
+                    result = queryData(request.target)
+                    response.send(result.json())
+                else:
+                    logger.error("The User %s is not authorized to access the target %s" % (request.user, request.target))
+                    response.send(AccessDenied)
+            else:
+                logger.error("Invalid Target: %s" % request.target)
+                response.send(InvalidTarget)
+        else:
+            logger.error("Over Quota for the User: %s" % request.user)
+            response.send(OverQuota)
+    else:
+        logger.error("Invalid User: %s" % request.user)
+        response.send(InvalidTarget)
+</code>
+                            </pre>
+                        </div>
                     </section>
 
                     <section>
-                        <h4>Lack of Logging</h4>
-                    </section>
+                        <h4>Take 2. Can You Spot Issues?</h4>
 
-                    <section>
-                        <h4>Deep Nesting</h4>
-                        <p>Quit early, remove nesting. <a href="https://testing.googleblog.com/2017/06/code-health-reduce-nesting-reduce.html">Source</a></p>
-                        <img src="img/deep-nesting-review.png" height="360" />
+                        <ol>
+                            <li class="fragment">Nesting is too deep!</li>
+                            <li class="fragment">Code on each line gets too long</li>
+                            <li class="fragment">The most important: Got a Bug! Switched InvalidTarget &amp; OverQuota</li>
+                        </ol>
                     </section>
 
                     <section>
