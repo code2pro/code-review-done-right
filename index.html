@@ -20,6 +20,17 @@
             link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
             document.getElementsByTagName( 'head' )[0].appendChild( link );
         </script>
+
+        <script>
+            function initSnippet() {
+                var snippets = document.querySelector('.code-snippet pre code');
+                for (var snippet in snippets) {
+                    hljs.highlightBlock(snippets[snippet]);
+                }
+            }
+
+            addEventListener('load', initSnippet);
+        </script>
     </head>
     <body>
         <div class="reveal">
@@ -356,12 +367,36 @@
                         </ol>
                     </section>
 
-                    <!--
-                        https://www.colm.net/news/2017/02/28/changes-to-ragel-cloudflare.html
-                        https://news.ycombinator.com/item?id=13802256
+                    <section>
+                        <h4>Can You Spot Issues?</h4>
 
-                        bad_type.c
-                    -->
+                        <div class=".code-snippet">
+                            <pre>
+<code
+>def getExpenseData(request, response):
+    if authenticate(request.user) \
+        && targetExists(request.target) \
+        && checkQuota(request.user) \
+        && isAuthorized(request.user, request.target):
+        result = queryData(request.target)
+        response.send(result.json())
+    else:
+        response.send(AccessDenied.json())
+</code>
+                            </pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h4>Can You Spot Issues?</h4>
+
+                        <ol>
+                            <li class="fragment">The condition chain is complex</li>
+                            <li class="fragment">AccessDenied is too vague, too little info</li>
+                            <li class="fragment">Error reporting needs imporiving</li>
+                            <li class="fragment">No logging</li>
+                        </ol>
+                    </section>
 
                     <section>
                         <h4>Poor Error Handling</h4>
@@ -384,6 +419,13 @@
                     <section>
                         <h4>Buffer Overflow</h4>
                     </section>
+
+                    <!--
+                        https://www.colm.net/news/2017/02/28/changes-to-ragel-cloudflare.html
+                        https://news.ycombinator.com/item?id=13802256
+
+                        bad_type.c
+                    -->
 
                     <section>
                         <h4>Codacy Sample</h4>
