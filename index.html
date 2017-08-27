@@ -381,7 +381,7 @@
         result = queryData(request.target)
         return result.json()
     else:
-        return AccessDenied
+        raise AccessDenied()
 </code>
                             </pre>
                         </div>
@@ -404,7 +404,7 @@
                         <div class=".code-snippet">
                             <pre>
 <code
->def getExpenseData(request, response):
+>def getExpenseData(request):
     if isAuthenticated(request.user):
         if targetExists(request.target):
             if withinQuota(request.user):
@@ -413,16 +413,16 @@
                     return result.json()
                 else:
                     logger.error("The user is not authorized to access the target!")
-                    return AccessDenied
+                    raise AccessDenied()
             else:
                 logger.error("Invalid target!")
-                return InvalidTarget
+                raise InvalidTarget()
         else:
             logger.error("Over quota for the user!")
-            return OverQuota
+            raise OverQuota()
     else:
         logger.error("Invalid user!")
-        return InvalidUser
+        raise InvalidUser()
 </code>
                             </pre>
                         </div>
@@ -468,24 +468,37 @@ logger.error(
                         <div class=".code-snippet">
                             <pre>
 <code
->def getExpenseData(request, response):
+>def getExpenseData(request):
     if not isAuthenticated(request.user):
         logger.error("Invalid user: %s" % request.user)
-        return InvalidUser
+        raise InvalidUser()
     if not targetExists(request.target):
         logger.error("Invalid target: %s" % request.target)
-        return InvalidTarget
+        raise InvalidTarget()
     if not withinQuota(request.user):
         logger.error("Over quota for the user: %s" % request.user)
-        return OverQuota
+        raise OverQuota()
     if not isAuthorized(request.user, request.target):
         logger.error("The user %s is not authorized to access the target %s" % (request.user, request.target))
-        return AccessDenied
+        raise AccessDenied()
     result = queryData(request.target)
     return result.json()
 </code>
                             </pre>
                         </div>
+                    </section>
+
+                    <section>
+                        <h4>Take 3. Commentary</h4>
+
+                        <ol>
+                            <li class="fragment">Practice defensive programming</li>
+                            <li class="fragment">Return as soon as you can</li>
+                            <li class="fragment">Avoid deep nesting</li>
+                            <li class="fragment">Handle all errors &amp; return values</li>
+                            <li class="fragment">Provide sufficient logging level &amp; contextual information</li>
+                            <li class="fragment">We can split 5 steps above into 5 middleware layers</li>
+                        </ol>
                     </section>
 
                     <section>
