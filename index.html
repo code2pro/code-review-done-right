@@ -669,6 +669,89 @@ update_team_balance(user, 1000000)
 
                     <section>
                         <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <p><a href="https://courses.cs.washington.edu/courses/cse484/14au/reading/25-years-vulnerabilities.pdf">
+                            <em>25 Years of Vulnerabilities: 1988-2012</em></a>, all vulnerabilities</p>
+                        <img src="img/stats-vuln-25-years-buffer.png" height="360">
+                    </section>
+
+                    <section>
+                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <p><a href="https://courses.cs.washington.edu/courses/cse484/14au/reading/25-years-vulnerabilities.pdf">
+                            <em>25 Years of Vulnerabilities: 1988-2012</em></a>, critical severity</p>
+                        <img src="img/stats-vuln-25-years-buffer-cve.png" height="360">
+                    </section>
+
+                    <section>
+                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+
+                        <ol>
+                            <li class="fragment">Buffer Overflow is the top vulnerability with 7809 cases reported in 25 years</li>
+                            <li class="fragment">Buffer Overflow account for 35% of critical severity vulnerabilities (1391 cases reported)</li>
+                        </ol>
+                    </section>
+
+                    <section>
+                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <p>How to cause a Buffer Overflow</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>...
+char buf[BUFSIZE];
+cin >> (buf);
+...
+</code>
+                            </pre>
+                        </div>
+
+                        <p class="fragment">We have the CloudFlare case waiting!</p>
+                    </section>
+
+                    <section>
+                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <p>How to cause a Buffer Overflow</p>
+
+                        <ol>
+                            <li class="fragment">Read <a href="https://www.owasp.org/index.php/Buffer_Overflow">OWASP</a></li>
+                            <li class="fragment">Check out <a href="http://www.cse.scu.edu/~tschwarz/coen152_05/Lectures/BufferOverflow.html">COEN 152 Computer Forensics</a></li>
+                        </ol>
+                    </section>
+
+                    <section>
+                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <p>How to cause a Stack Overflow</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>def fib(n):
+    if n < 2:
+        return 1
+    else:
+        return fib(n - 1) + fib(n - 2)
+</code>
+                            </pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <p>How to cause a Stack Overflow</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>class Record
+{
+...
+    // Max record anticipated
+    char array[1500000];
+...
+};
+</code>
+                            </pre>
+                        </div>
                     </section>
 
                     <section>
@@ -862,6 +945,7 @@ private:
                             <pre>
 <code
 >// CloudFlare blames Ragel's generated code as the root cause
+// This is buffer overflow!
 
 /* generated code */
 if ( ++p == pe )
