@@ -358,7 +358,7 @@
                             <li class="fragment">Complicated Conditions</li>
                             <li class="fragment">Poor Error Handling</li>
                             <li class="fragment">Lack of Logging</li>
-                            <li class="fragment">Type Safety</li>
+                            <li class="fragment">Type Safety Matters</li>
                             <li class="fragment">Buffer Overflow &amp; Stack Overflow</li>
                             <li class="fragment">Number Overflow: Google Binary Search</li>
                             <li class="fragment">Lack of Abstraction: Deadlock &amp; Memory Leak</li>
@@ -370,7 +370,7 @@
                     <section>
                         <h4>Take 1. Can You Spot Issues?</h4>
 
-                        <div class=".code-snippet">
+                        <div class="code-snippet">
                             <pre>
 <code
 >def getExpenseData(request):
@@ -401,7 +401,7 @@
                     <section>
                         <h4>Take 2. Can You Spot Issues?</h4>
 
-                        <div class=".code-snippet">
+                        <div class="code-snippet">
                             <pre>
 <code
 >def getExpenseData(request):
@@ -466,7 +466,7 @@ logger.error(
                     <section>
                         <h4>Take 3. We Are Done!</h4>
 
-                        <div class=".code-snippet">
+                        <div class="code-snippet">
                             <pre>
 <code
 >def getExpenseData(request):
@@ -503,7 +503,41 @@ logger.error(
                     </section>
 
                     <section>
-                        <h4>Type Safety</h4>
+                        <h4>Type Safety Matters</h4>
+                        <p class="fragment">Or how a developer missed dinner date*</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>def updateTeamBalance(id, balance):
+    ...
+
+def updateUserBalance(id, balance):
+    ...
+</code>
+                            </pre>
+                        </div>
+
+                        <p class="fragment">Note: It was a cliché</p>
+                    </section>
+
+                    <section>
+                        <h4>Type Safety Matters</h4>
+                        <p class="fragment">If it was written in C/C++</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>void update_team_balance(int id, double balance)
+{...}
+
+void update_user_balance(int id, double balance)
+{...}
+</code>
+                            </pre>
+                        </div>
+
+                        <p class="fragment">Still not any safer</p>
                     </section>
 
                     <section>
@@ -525,13 +559,6 @@ logger.error(
                     <!--
                         https://www.colm.net/news/2017/02/28/changes-to-ragel-cloudflare.html
                         https://news.ycombinator.com/item?id=13802256
-
-                        <li class="fragment">Type Safety</li>
-                        <li class="fragment">Buffer Overflow &amp; Stack Overflow</li>
-                        <li class="fragment">Number Overflow: Google Binary Search</li>
-                        <li class="fragment">Lack of Abstraction: Deadlock &amp; Memory Leak</li>
-                        <li class="fragment">Trust But Verify Generated Code: Ragel &amp; CloudFlare</li>
-                        <li class="fragment">Codacy Sample</li>
 
                         bad_type.c
                     -->
