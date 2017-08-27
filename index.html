@@ -345,7 +345,7 @@
                             <li class="fragment">Lack of Logging</li>
                             <li class="fragment">Type Safety Matters</li>
                             <li class="fragment">Buffer Overflow &amp; Stack Overflow</li>
-                            <li class="fragment">Number Overflow: Google Binary Search</li>
+                            <li class="fragment">Integer Overflow: Google Binary Search</li>
                             <li class="fragment">Lack of Abstraction: Deadlock &amp; Memory Leak</li>
                             <li class="fragment">Trust But Verify Generated Code: Ragel &amp; CloudFlare</li>
                             <li class="fragment">Codacy Sample</li>
@@ -669,7 +669,7 @@ update_team_balance(user, 1000000)
                     </section>
 
                     <section>
-                        <h4>Number Overflow: Google Binary Search</h4>
+                        <h4>Integer Overflow: Google Binary Search</h4>
                         <p class="fragment">Adapted to fit this screen from
                             <a href="https://research.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">source</a></p>
 
@@ -694,7 +694,7 @@ update_team_balance(user, 1000000)
                     </section>
 
                     <section>
-                        <h4>Number Overflow: Google Binary Search</h4>
+                        <h4>Integer Overflow: Google Binary Search</h4>
                         <p>The issue is on the line 5</p>
 
                         <div class="fragment code-snippet">
@@ -707,11 +707,11 @@ update_team_balance(user, 1000000)
                             </pre>
                         </div>
 
-                        <p class="fragment">Happens when: (low + high) > 2<sup>31</sup> - 1</p>
+                        <p class="fragment">Integer overflow when: (low + high) > 2<sup>31</sup> - 1</p>
                     </section>
 
                     <section>
-                        <h4>Number Overflow: Google Binary Search</h4>
+                        <h4>Integer Overflow: Google Binary Search</h4>
                         <p>Solutions</p>
 
                         <div class="fragment code-snippet">
