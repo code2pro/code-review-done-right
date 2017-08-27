@@ -349,7 +349,7 @@
                             <li class="fragment">Buffer Overflow &amp; Stack Overflow</li>
                             <li class="fragment">Integer Overflow: Google Binary Search</li>
                             <li class="fragment">Lack of Abstraction: Memory Leak &amp; Deadlock</li>
-                            <li class="fragment">Verify Generated Code: Ragel &amp; CloudFlare</li>
+                            <li class="fragment">Verify Generated Code: CloudFlare &amp; Ragel</li>
                             <li class="fragment">Codacy Sample</li>
                         </ol>
                     </section>
@@ -826,11 +826,79 @@ private:
                     </section>
 
                     <section>
-                        <h4>Verify Generated Code: Ragel &amp; CloudFlare</h4>
+                        <h4>Verify Generated Code: CloudFlare &amp; Ragel</h4>
+
+                        <img src="img/cloudflare-notified-2017-02-18.png" height="400">
+                    </section>
+
+                    <section>
+                        <h4>Verify Generated Code: CloudFlare &amp; Ragel</h4>
+                        <p>The problems (1/3)</p>
+
+                        <ol>
+                            <li class="fragment">CloudFlare edge servers leaks some sensitive data: HTTP cookies, HTTP POST bodies, auth tokens, etc</li>
+                            <li class="fragment">Search engines cache some data</li>
+                            <li class="fragment">Memory is leaked on the CloudFlare servers</li>
+                        </ol>
+                    </section>
+
+                    <section>
+                        <h4>Verify Generated Code: CloudFlare &amp; Ragel</h4>
+                        <p>The problems (2/3)</p>
+
+                        <ol>
+                            <li class="fragment">CloudFlare parses HTML on the fly</li>
+                            <li class="fragment">CloudFlare developed a new parser to replace Ragel and the issue occurred</li>
+                            <li class="fragment">HTML parsing for email obfuscation, HTTP to HTTPS, server-side excludes, etc</li>
+                        </ol>
+                    </section>
+
+                    <section>
+                        <h4>Verify Generated Code: CloudFlare &amp; Ragel</h4>
+                        <p>The problems (3/3). Read on
+                            <a href="https://blog.cloudflare.com/incident-report-on-memory-leak-caused-by-cloudflare-parser-bug/">CloudFlare's blog</a></p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>// CloudFlare blames Ragel's generated code as the root cause
+
+/* generated code */
+if ( ++p == pe )
+    goto _test_eof;
+
+// Note that due to mixing 2 parsers, p > pe
+// The condition should have been ++p >= pe
+</code>
+                            </pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h4>Verify Generated Code: CloudFlare &amp; Ragel</h4>
+                        <p>Commentary</p>
+
+                        <ol>
+                            <li class="fragment">Ragel <a href="https://www.colm.net/news/2017/02/28/changes-to-ragel-cloudflare.html">fires back and points out</a> that CloudFlare has been using the parser generater wrong</li>
+                            <li class="fragment">Ragel will make code change to make generated code safer (don't trust users!)</li>
+                        </ol>
+                    </section>
+
+                    <section>
+                        <h4>Verify Generated Code: CloudFlare &amp; Ragel</h4>
+                        <p>Solution</p>
+
+                        <ol>
+                            <li>Generated code must be tested and reviewed too</li>
+                            <li>Avoid using generated code blindly</li>
+                            <li>Prefer parser combinators to parser generators with write-only syntax &amp; overly complex code</li>
+                            <li>Read the paper <a href="http://spw17.langsec.org/papers/chifflier-parsing-in-2017.pdf">
+                                <em>Writing parsers like it is 2017</em></a></li>
+                        </ol>
                     </section>
 
                     <!--
-                        https://www.colm.net/news/2017/02/28/changes-to-ragel-cloudflare.html
+
                         https://news.ycombinator.com/item?id=13802256
                     -->
 
@@ -839,11 +907,7 @@ private:
                     </section>
 
                     <!--
-                        Pipeline instead of looping
-                        Binary search overflow, double-visiting
-                        Memory leak by using bad API
                         Double-locking by using bad API
-                        Exit early to avoid deep nesting
                     -->
                     <!-- Use cases: C++, Python, Pren-up (Marriage Contract) :P -->
                 </section>
@@ -882,13 +946,7 @@ private:
 
                 <!--
                 References
-                Security Code Review for C, C++, Java
-                Effective C++: Date(year, month, day)
-                Programming Pearls
-                Valgrind Memcheck
-                Hellgrind
-
-                TopDev Logo
+                Empirical research: MS, Pitt, Princeton
                 -->
 
                 <section>
