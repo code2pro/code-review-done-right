@@ -373,15 +373,15 @@
                         <div class=".code-snippet">
                             <pre>
 <code
->def getExpenseData(request, response):
-    if authenticate(request.user) \
+>def getExpenseData(request):
+    if isAuthenticated(request.user) \
         && targetExists(request.target) \
-        && checkQuota(request.user) \
+        && withinQuota(request.user) \
         && isAuthorized(request.user, request.target):
         result = queryData(request.target)
-        response.send(result.json())
+        return result.json()
     else:
-        response.send(AccessDenied)
+        return AccessDenied
 </code>
                             </pre>
                         </div>
@@ -405,24 +405,24 @@
                             <pre>
 <code
 >def getExpenseData(request, response):
-    if authenticate(request.user):
+    if isAuthenticated(request.user):
         if targetExists(request.target):
-            if checkQuota(request.user):
+            if withinQuota(request.user):
                 if isAuthorized(request.user, request.target):
                     result = queryData(request.target)
-                    response.send(result.json())
+                    return result.json()
                 else:
-                    logger.error("The user %s is not authorized to access the target %s" % (request.user, request.target))
-                    response.send(AccessDenied)
+                    logger.error("The user is not authorized to access the target!")
+                    return AccessDenied
             else:
-                logger.error("Invalid target: %s" % request.target)
-                response.send(InvalidTarget)
+                logger.error("Invalid target!")
+                return InvalidTarget
         else:
-            logger.error("Over quota for the user: %s" % request.user)
-            response.send(OverQuota)
+            logger.error("Over quota for the user!")
+            return OverQuota
     else:
-        logger.error("Invalid user: %s" % request.user)
-        response.send(InvalidTarget)
+        logger.error("Invalid user!")
+        return InvalidUser
 </code>
                             </pre>
                         </div>
@@ -457,6 +457,32 @@ logger.error("The user is not authorized to access the target!")
 logger.error(
     "The user %s is not authorized to access the target %s" % (
         request.user, request.target))
+</code>
+                            </pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h4>Take 3. We Are Done!</h4>
+
+                        <div class=".code-snippet">
+                            <pre>
+<code
+>def getExpenseData(request, response):
+    if not isAuthenticated(request.user):
+        logger.error("Invalid user: %s" % request.user)
+        return InvalidUser
+    if not targetExists(request.target):
+        logger.error("Invalid target: %s" % request.target)
+        return InvalidTarget
+    if not withinQuota(request.user):
+        logger.error("Over quota for the user: %s" % request.user)
+        return OverQuota
+    if not isAuthorized(request.user, request.target):
+        logger.error("The user %s is not authorized to access the target %s" % (request.user, request.target))
+        return AccessDenied
+    result = queryData(request.target)
+    return result.json()
 </code>
                             </pre>
                         </div>
