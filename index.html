@@ -347,7 +347,7 @@
                             <li class="fragment">Buffer Overflow &amp; Stack Overflow</li>
                             <li class="fragment">Integer Overflow: Google Binary Search</li>
                             <li class="fragment">Lack of Abstraction: Memory Leak &amp; Deadlock</li>
-                            <li class="fragment">Trust But Verify Generated Code: Ragel &amp; CloudFlare</li>
+                            <li class="fragment">Verify Generated Code: Ragel &amp; CloudFlare</li>
                             <li class="fragment">Codacy Sample</li>
                         </ol>
                     </section>
@@ -744,7 +744,7 @@ update_team_balance(user, 1000000)
 
                     <section>
                         <h4>Lack of Abstraction: Memory Leak &amp; Deadlock</h4>
-                        <p class="fragment">Safe API design is tricky</p>
+                        <p>Designing safe APIs is tricky</p>
 
                         <div class="fragment code-snippet">
                             <pre>
@@ -768,7 +768,27 @@ public:
                     </section>
 
                     <section>
-                        <h4>Trust But Verify Generated Code: Ragel &amp; CloudFlare</h4>
+                        <h4>Lack of Abstraction: Memory Leak &amp; Deadlock</h4>
+                        <p>Practical Issues</p>
+
+                        <ol>
+                            <li class="fragment">Clients use DbConn directly and have to
+                                <code>open/close/execute</code> explicitly</li>
+                            <li class="fragment">Clients allocate DbConn on heap and forget to close</li>
+                            <li class="fragment">Clients don't close DbConn on exception</li>
+                            <li class="fragment">Memory is leaked due to clients' mistakes!</li>
+                            <li class="fragment">DB server has too many file descriptors open!</li>
+                        </ol>
+                    </section>
+
+                    <section>
+                        <h4>Lack of Abstraction: Memory Leak &amp; Deadlock</h4>
+
+                        <img src="img/memory-leak-headache.jpg" height="400" />
+                    </section>
+
+                    <section>
+                        <h4>Verify Generated Code: Ragel &amp; CloudFlare</h4>
                     </section>
 
                     <!--
