@@ -579,6 +579,7 @@ def update_user_balance(user, balance):
     # Use user.ID
     ...
 
+# Duck-typing is a double-edge sword
 # By accident - will update a team whose ID = user.ID
 update_team_balance(user, 1000000)
 </code>
@@ -647,6 +648,19 @@ update_team_balance(user, 1000000)
 </code>
                             </pre>
                         </div>
+                    </section>
+
+                    <section>
+                        <h4>Type Safety Matters</h4>
+                        <p>Key Takeaways</p>
+
+                        <ol>
+                            <li class="fragment">Have proper design review before coding</li>
+                            <li class="fragment">Type safety is your best friend</li>
+                            <li class="fragment">Use distinct types whenever you can</li>
+                            <li class="fragment">Duck-typing is a two-edged sword: Use distinct names for methods and props across diff types</li>
+                            <li class="fragment">Use type annotation &amp; static analysis tools</li>
+                        </ol>
                     </section>
 
                     <section>
