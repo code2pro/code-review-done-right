@@ -394,7 +394,7 @@
                             <li class="fragment">The condition chain is complex</li>
                             <li class="fragment">AccessDenied is too vague, too little info</li>
                             <li class="fragment">Error reporting needs imporiving</li>
-                            <li class="fragment">No logging</li>
+                            <li class="fragment">No logging! How to know when issues happen?</li>
                         </ol>
                     </section>
 
@@ -412,16 +412,16 @@
                     result = queryData(request.target)
                     response.send(result.json())
                 else:
-                    logger.error("The User %s is not authorized to access the target %s" % (request.user, request.target))
+                    logger.error("The user %s is not authorized to access the target %s" % (request.user, request.target))
                     response.send(AccessDenied)
             else:
-                logger.error("Invalid Target: %s" % request.target)
+                logger.error("Invalid target: %s" % request.target)
                 response.send(InvalidTarget)
         else:
-            logger.error("Over Quota for the User: %s" % request.user)
+            logger.error("Over quota for the user: %s" % request.user)
             response.send(OverQuota)
     else:
-        logger.error("Invalid User: %s" % request.user)
+        logger.error("Invalid user: %s" % request.user)
         response.send(InvalidTarget)
 </code>
                             </pre>
@@ -436,6 +436,30 @@
                             <li class="fragment">Code on each line gets too long</li>
                             <li class="fragment">The most important: Got a Bug! Switched InvalidTarget &amp; OverQuota</li>
                         </ol>
+                    </section>
+
+                    <section>
+                        <h4>A note for logging</h4>
+
+                        <ol>
+                            <li class="fragment">Make sure logging is sufficient</li>
+                            <li class="fragment">Use logging level correctly: FATAL, ERROR, WARN, INFO, DEBUG, TRACE</li>
+                            <li class="fragment">Logging must contain useful information</li>
+                        </ol>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+># BAD:
+logger.error("The user is not authorized to access the target!")
+
+# GOOD:
+logger.error(
+    "The user %s is not authorized to access the target %s" % (
+        request.user, request.target))
+</code>
+                            </pre>
+                        </div>
                     </section>
 
                     <section>
