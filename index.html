@@ -509,16 +509,19 @@ logger.error(
                         <div class="fragment code-snippet">
                             <pre>
 <code
->def updateTeamBalance(id, balance):
+>def update_team_balance(teamId, balance):
     ...
 
-def updateUserBalance(id, balance):
+def update_user_balance(userId, balance):
     ...
+
+# By accident - will update a team whose id = userId
+update_team_balance(userId, 1000000)
 </code>
                             </pre>
                         </div>
 
-                        <p class="fragment">Note: It was a cliché</p>
+                        <p class="fragment">Note: It was a cliché ;-)</p>
                     </section>
 
                     <section>
@@ -528,16 +531,122 @@ def updateUserBalance(id, balance):
                         <div class="fragment code-snippet">
                             <pre>
 <code
->void update_team_balance(int id, double balance)
-{...}
+>void update_team_balance(int teamId, double balance);
 
-void update_user_balance(int id, double balance)
-{...}
+void update_user_balance(int userId, double balance);
 </code>
                             </pre>
                         </div>
 
-                        <p class="fragment">Still not any safer</p>
+                        <p class="fragment">Still not any safer!</p>
+                    </section>
+
+                    <section>
+                        <h4>Type Safety Matters</h4>
+                        <p class="fragment">Take 1. Let's pass typed instances</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>typedef struct {int id;} team_t;
+typedef struct {int id;} user_t;
+
+void update_team_balance(const team_t* ptrTeam, double balance);
+
+void update_user_balance(const user_t* ptrUser, double balance);
+
+void updateTeamBalance(const team_t& team, double balance);
+void updateUserBalance(const user_t& user, double balance);
+</code>
+                            </pre>
+                        </div>
+
+                        <p class="fragment">C/C++ version is better &amp; safer now</p>
+                    </section>
+
+                    <section>
+                        <h4>Type Safety Matters</h4>
+                        <p class="fragment">Take 1. What about the Python version?</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>def update_team_balance(team, balance):
+    # Use team.ID
+    ...
+
+def update_user_balance(user, balance):
+    # Use user.ID
+    ...
+
+# By accident - will update a team whose ID = user.ID
+update_team_balance(user, 1000000)
+</code>
+                            </pre>
+                        </div>
+
+                        <p class="fragment">It's not quite safe in Python yet :-(</p>
+                    </section>
+
+                    <section>
+                        <h4>Type Safety Matters</h4>
+                        <p class="fragment">Take 2. Better &amp; safer Python version</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>class User:
+    def userId(self): return self.ID
+
+class Team:
+    def teamId(self): return self.ID
+
+def update_team_balance(team, balance):
+    # Use team.teamId()
+
+def update_user_balance(user, balance):
+    # Use user.userId()
+
+update_team_balance(user, 1000000) # Won't work!
+</code>
+                            </pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h4>Type Safety Matters</h4>
+                        <p class="fragment">Take 2. One can use distinct properties too</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>class User:
+    def __init__(self, userId):
+        self.userId = userId
+
+class Team:
+    def __init__(self, teamId):
+        self.teamId = teamId
+
+# This function requires teamId, make sure User doesn't have it
+update_team_balance(user, 1000000)
+</code>
+                            </pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h4>Type Safety Matters</h4>
+                        <p class="fragment">Take 2. How about Java, PHP, C/C++?</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code>
+// Left as an exercise to the audience ;-)
+
+</code>
+                            </pre>
+                        </div>
                     </section>
 
                     <section>
