@@ -670,6 +670,62 @@ update_team_balance(user, 1000000)
 
                     <section>
                         <h4>Number Overflow: Google Binary Search</h4>
+                        <p class="fragment">Adapted to this screen from
+                            <a href="https://research.googleblog.com/2006/06/extra-extra-read-all-about-it-nearly.html">source</a></p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>1:     public static int binarySearch(int[] a, int key) {
+2:         int low = 0;
+3:         int high = a.length - 1;
+4:         while (low <= high) {
+5:             int mid = (low + high) / 2;
+6:             int midVal = a[mid];
+7:             if (midVal < key)       low = mid + 1
+8:             else if (midVal > key)  high = mid - 1;
+9:             else                    return mid; // key found
+10:        }
+11:        return -(low + 1);  // key not found.
+12:    }
+</code>
+                            </pre>
+                        </div>
+                    </section>
+
+                    <section>
+                        <h4>Number Overflow: Google Binary Search</h4>
+                        <p>The issue is on the line 5</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>
+5:         int mid = (low + high) / 2;
+
+</code>
+                            </pre>
+                        </div>
+
+                        <p class="fragment">Happens when: (low + high) > 2<sup>31</sup> - 1</p>
+                    </section>
+
+                    <section>
+                        <h4>Number Overflow: Google Binary Search</h4>
+                        <p>Solutions</p>
+
+                        <div class="fragment code-snippet">
+                            <pre>
+<code
+>5:         int mid = low + (high - low) / 2;
+
+// The author also suggested a hacky way for C/C++
+5:         int mid = ((unsigned int)low + (unsigned int)high) >> 1;
+
+// It's the best to use unsigned int and use the 1st approach
+</code>
+                            </pre>
+                        </div>
                     </section>
 
                     <section>
