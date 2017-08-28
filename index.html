@@ -700,6 +700,9 @@ update_team_balance(user, 1000000)
 char buf[BUFSIZE];
 cin >> (buf);
 ...
+// This is safe
+std::string safeBuf;
+cin >> safeBuf;
 </code>
                             </pre>
                         </div>
@@ -756,6 +759,31 @@ void processData(int input, int anotherInput) // Simplified code
 </code>
                             </pre>
                         </div>
+                    </section>
+
+                    <section>
+                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <p>Commentary: Buffer Overflow</p>
+
+                        <ol>
+                            <li class="fragment">Use static analysis to detect potential buffer overflow cases</li>
+                            <li class="fragment">Always do boundary checking: == is not sufficient</li>
+                            <li class="fragment">Do not use old unsafe functions like sprintf/vsprintf</li>
+                            <li class="fragment">Prefer functions with boundary: snprintf/vsnprintf</li>
+                            <li class="fragment">Practice defensive programming and don't trust user input!</li>
+                        </ol>
+                    </section>
+
+                    <section>
+                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <p>Commentary: Stack Overflow</p>
+
+                        <ol>
+                            <li class="fragment">Design your algo carefully when using recursion</li>
+                            <li class="fragment">Write tail-recursive functions if you can</li>
+                            <li class="fragment">Use std::stack &amp; loop to achieve the same effect as recursion but using heap</li>
+                            <li class="fragment">Use heap (malloc/free/new/delete) if you need to allocate large memory</li>
+                        </ol>
                     </section>
 
                     <section>
