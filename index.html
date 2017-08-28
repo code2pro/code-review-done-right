@@ -346,7 +346,8 @@
                             <li class="fragment">Poor Error Handling</li>
                             <li class="fragment">Lack of Logging</li>
                             <li class="fragment">Type Safety Matters</li>
-                            <li class="fragment">Buffer Overflow &amp; Stack Overflow</li>
+                            <li class="fragment">Buffer Overflow</li>
+                            <li class="fragment">Stack Overflow</li>
                             <li class="fragment">Integer Overflow: Google Binary Search</li>
                             <li class="fragment">Lack of Abstraction: Memory Leak &amp; Deadlock</li>
                             <li class="fragment">Verify Generated Code: CloudFlare &amp; Ragel</li>
@@ -667,21 +668,21 @@ update_team_balance(user, 1000000)
                     </section>
 
                     <section>
-                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <h4>Buffer Overflow</h4>
                         <p><a href="https://courses.cs.washington.edu/courses/cse484/14au/reading/25-years-vulnerabilities.pdf">
                             <em>25 Years of Vulnerabilities: 1988-2012</em></a>, all vulnerabilities</p>
                         <img src="img/stats-vuln-25-years-buffer.png" height="360">
                     </section>
 
                     <section>
-                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <h4>Buffer Overflow</h4>
                         <p><a href="https://courses.cs.washington.edu/courses/cse484/14au/reading/25-years-vulnerabilities.pdf">
                             <em>25 Years of Vulnerabilities: 1988-2012</em></a>, critical severity</p>
                         <img src="img/stats-vuln-25-years-buffer-cve.png" height="360">
                     </section>
 
                     <section>
-                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <h4>Buffer Overflow</h4>
 
                         <ol>
                             <li class="fragment">Buffer Overflow is the top vulnerability with 7809 cases reported in 25 years</li>
@@ -690,7 +691,7 @@ update_team_balance(user, 1000000)
                     </section>
 
                     <section>
-                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <h4>Buffer Overflow</h4>
                         <p>How to cause a Buffer Overflow</p>
 
                         <div class="fragment code-snippet">
@@ -711,7 +712,7 @@ cin >> safeBuf;
                     </section>
 
                     <section>
-                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <h4>Buffer Overflow</h4>
                         <p>How to cause a Buffer Overflow</p>
 
                         <ol>
@@ -721,7 +722,20 @@ cin >> safeBuf;
                     </section>
 
                     <section>
-                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <h4>Buffer Overflow</h4>
+                        <p>Commentary</p>
+
+                        <ol>
+                            <li class="fragment">Use static analysis to detect potential buffer overflow cases</li>
+                            <li class="fragment">Always do boundary checking: == is not sufficient</li>
+                            <li class="fragment">Do not use old unsafe functions like sprintf/vsprintf</li>
+                            <li class="fragment">Prefer functions with boundary: snprintf/vsnprintf</li>
+                            <li class="fragment">Practice defensive programming and don't trust user input!</li>
+                        </ol>
+                    </section>
+
+                    <section>
+                        <h4>Stack Overflow</h4>
                         <p>How to cause a Stack Overflow</p>
 
                         <div class="fragment code-snippet">
@@ -738,7 +752,7 @@ cin >> safeBuf;
                     </section>
 
                     <section>
-                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
+                        <h4>Stack Overflow</h4>
                         <p>How to cause a Stack Overflow</p>
 
                         <div class="fragment code-snippet">
@@ -762,25 +776,13 @@ void processData(int input, int anotherInput) // Simplified code
                     </section>
 
                     <section>
-                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
-                        <p>Commentary: Buffer Overflow</p>
-
-                        <ol>
-                            <li class="fragment">Use static analysis to detect potential buffer overflow cases</li>
-                            <li class="fragment">Always do boundary checking: == is not sufficient</li>
-                            <li class="fragment">Do not use old unsafe functions like sprintf/vsprintf</li>
-                            <li class="fragment">Prefer functions with boundary: snprintf/vsnprintf</li>
-                            <li class="fragment">Practice defensive programming and don't trust user input!</li>
-                        </ol>
-                    </section>
-
-                    <section>
-                        <h4>Buffer Overflow &amp; Stack Overflow</h4>
-                        <p>Commentary: Stack Overflow</p>
+                        <h4>Stack Overflow</h4>
+                        <p>Commentary</p>
 
                         <ol>
                             <li class="fragment">Design your algo carefully when using recursion</li>
                             <li class="fragment">Write tail-recursive functions if you can</li>
+                            <li class="fragment">Use memoization/caching</li>
                             <li class="fragment">Use std::stack &amp; loop to achieve the same effect as recursion but using heap</li>
                             <li class="fragment">Use heap (malloc/free/new/delete) if you need to allocate large memory</li>
                         </ol>
